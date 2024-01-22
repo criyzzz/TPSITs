@@ -1,0 +1,58 @@
+package video;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+public class VideoPlayer {
+
+    public static void main(String[] args) {
+        // Lista di video con le relative durate
+        List<Video> videoList = new ArrayList<>();
+        videoList.add(new Video("Video1", 20));
+        videoList.add(new Video("Video2", 30));
+        videoList.add(new Video("Video3", 15));
+        videoList.add(new Video("Video4", 5));
+
+        // Riproduce i video finché non li ha riprodotti tutti almeno una volta
+        playAllVideos(videoList);
+    }
+
+    private static void playAllVideos(List<Video> videoList) {
+        List<Video> shuffledVideos = new ArrayList<>(videoList);
+        Collections.shuffle(shuffledVideos);
+
+        for (Video video : shuffledVideos) {
+            playVideo(video);
+        }
+    }
+
+    private static void playVideo(Video video) {
+        System.out.println("Riproduzione di " + video.getName() + " per 5 secondi");
+        // Simula la riproduzione per 5 secondi
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class Video {
+        private String name;
+        private int duration;
+
+        public Video(String name, int duration) {
+            this.name = name;
+            this.duration = duration;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+    }
+}

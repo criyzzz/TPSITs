@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class VideoPlayer {
+
+    public static void main(String[] args) {
+
+        int displayTime = 1;
+
+        // Lista di video con le relative durate
+        List<Video> videoList = new ArrayList<>();
+        videoList.add(new Video("Video1", 2, 0));
+        videoList.add(new Video("Video2", 4, 0));
+        videoList.add(new Video("Video3", 6, 0));
+        videoList.add(new Video("Video4", 8, 0));
+
+        int lastRandom = -1;
+
+        // Calculate the amount of duration of all videos
+        int totalTime = 0;
+        for (int i = 0; i < videoList.size(); i++) {
+            totalTime += videoList.get(i).duration;
+        }
+
+        // calculate the time that the reproduction lasts
+        int riproductionLength = videoList.size() * videoList.stream().mapToInt(Video::getDuration).max().orElse(0);
+
+        // reproduce the videos
+        Random random = new Random();
+        for (int y = 0; y < riproductionLength; y++) {
+            // Generating a random integer between 0 and the number of videos
+            int randomNumber = random.nextInt(videoList.size());
+
+            if (lastRandom != randomNumber) {
+                Video videoInPlaying = videoList.get(randomNumber);
+                if (videoInPlaying.getdisplayed() != 7) {
+                    videoInPlaying.reduceDuration(displayTime);
+                    videoInPlaying.increaseDisplayed(displayTime);
+                    System.out.println(videoInPlaying.getName());
+                } else {
+                    y--;
+                }
+            } else {
+                y--;
+            }
+
+            lastRandom = randomNumber;
+        }
+
+        for (int x = 0; x < videoList.size(); x++) {
+            System.out.println("video " + (x + 1) + " mostrato per " + videoList.get(x).getdisplayed() + " secondi");
+        }
+    }
+}

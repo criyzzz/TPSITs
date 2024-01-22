@@ -1,0 +1,55 @@
+package video;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class VideoPlayer {
+
+	public static void main(String[] args) {
+
+		int totalTime = 0;
+
+		int displayTime = 1;
+
+		// Lista di video con le relative durate
+		List<Video> videoList = new ArrayList<>();
+		videoList.add(new Video("Video1", 5));
+		videoList.add(new Video("Video2", 7));
+		videoList.add(new Video("Video3", 2));
+		videoList.add(new Video("Video4", 4));
+
+		int lastRandom = videoList.size()+1;
+
+
+		// Calculate the duration of all videos
+		for(int i = 0; i<videoList.size(); i++) {
+			totalTime += videoList.get(i).duration;
+		}
+
+		//calculate the time that the riproduction lasts
+		int bigger =0;
+		for(int x = 0; x<videoList.size(); x++) {
+			if(videoList.get(x).getDuration()>bigger) {
+				bigger = videoList.get(x).getDuration();
+			}
+		}
+		int riproductionLength = bigger*videoList.size();
+
+		for(int y = 0; y < riproductionLength; y++) {
+			// Generating a random integer beetween 0 and 3
+			Random random = new Random();
+			int randomNumber = random.nextInt(3);
+			if(lastRandom != randomNumber) {
+				Video videoInPlaying = videoList.get(randomNumber);
+				videoInPlaying.reduceDuration(displayTime);
+				System.out.println(videoInPlaying.getName()+" riprodotto per 1 min, tempo rimanente "+videoInPlaying.getDuration());
+			}
+			
+			lastRandom = randomNumber;
+
+		}
+
+	}
+
+}

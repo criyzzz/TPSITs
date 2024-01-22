@@ -1,0 +1,38 @@
+package video;
+
+public class Video {
+<<<<<<< HEAD
+    public String name;
+    public int duration;
+    public int displayed;
+
+    public Video(String name, int duration, int displayed) {
+        this.name = name;
+        this.duration = duration;
+        this.displayed = displayed;
+        
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+    
+    public int getdisplayed() {
+        return displayed;
+    }
+
+    public void reduceDuration(int seconds) {
+        duration -= seconds;
+    }
+    
+    public void increaseDisplayed(int seconds) {
+        displayed += seconds;
+    }
+=======
+
+>>>>>>> 28ccd3847be21e6c86457c640f5e787a860c3c36
+}
