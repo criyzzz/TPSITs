@@ -38,6 +38,19 @@ public class VideoPlayerB {
             // Shuffle the video list for random playback order in each iteration
             Collections.shuffle(videoList);
 
+            // Check for consecutive videos with the same name and swap them
+            for(int t = 0; t < videoList.size(); t++) {
+                if(t < videoList.size()-1) {
+                    if(videoList.get(t).name.equals(videoList.get(t+1).name)) {
+                        Video saveVideo = videoList.get(t);
+                        videoList.remove(t);
+                        videoList.add(t, videoList.get(t+1));
+                        videoList.remove(t+1);
+                        videoList.add(t+1, saveVideo);
+                    }
+                }
+            }
+
             // Reduce the duration of each video and print the playback message
             for(int c = 0; c < videoList.size(); c++) {
                 videoList.get(c).reduceDuration(displayTime);
