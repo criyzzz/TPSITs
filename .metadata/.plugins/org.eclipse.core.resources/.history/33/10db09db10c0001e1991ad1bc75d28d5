@@ -1,0 +1,46 @@
+package video;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class VideoPlayerB {
+
+	public static void main(String[] args) {
+
+		int displayTime = 1;
+
+		List<Video> videoList = new ArrayList<>();
+		videoList.add(new Video("Video1", 3, 0));
+		videoList.add(new Video("Video2", 6, 0));
+		videoList.add(new Video("Video3", 9, 0));
+		videoList.add(new Video("Video4", 12, 0));
+
+		Collections.shuffle(videoList);
+
+		while (videoList.get(0).duration > 0 || videoList.get(1).duration > 0 || videoList.get(2).duration > 0
+				|| videoList.get(3).duration > 0
+				) {
+
+			Collections.shuffle(videoList);
+
+			for(int t = 0; t<videoList.size(); t++) {
+				if(t<videoList.size()-1) {
+					if(videoList.get(t).name.equals(videoList.get(t+1).name)) {
+						Video saveVideo = videoList.get(t);
+						videoList.remove(t);
+						videoList.add(t, videoList.get(t+1));
+						videoList.remove(t+1);
+						videoList.add(t+1, saveVideo);
+					}
+				}
+
+			}
+
+			for(int c = 0; c<videoList.size(); c++) {
+				videoList.get(c).reduceDuration(displayTime);
+				System.out.println(videoList.get(c).name+" riproduced for 1 min");
+			}
+		}
+	}
+}

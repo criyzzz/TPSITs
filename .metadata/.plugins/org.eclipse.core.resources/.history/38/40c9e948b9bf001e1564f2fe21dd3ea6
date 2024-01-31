@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class VideoPlayer {
+
+    public static void main(String[] args) {
+
+        int displayTime = 1;
+
+        /*
+         * List of videos
+         */
+        List<Video> videoList = new ArrayList<>();
+        videoList.add(new Video("Video1", 3, 0));
+        videoList.add(new Video("Video2", 6, 0));
+        videoList.add(new Video("Video3", 9, 0));
+        videoList.add(new Video("Video4", 12, 0));
+
+        /*
+         * Track indices of displayed videos
+         */
+        List<Integer> displayedIndices = new ArrayList<>();
+
+        /*
+         * Reproduce the videos
+         */
+        while (displayedIndices.size() < videoList.size()) {
+            /*
+             * Generating a random integer between 0 and the number of videos
+             */
+            Random random = new Random();
+            int randomNumber;
+
+            do {
+                randomNumber = random.nextInt(videoList.size());
+            } while (displayedIndices.contains(randomNumber));
+
+            Video videoInPlaying = videoList.get(randomNumber);
+            videoInPlaying.reduceDuration(displayTime);
+            videoInPlaying.increaseDisplayed(displayTime);
+            System.out.println(videoInPlaying.getName());
+
+            displayedIndices.add(randomNumber);
+        }
+
+        for (int x = 0; x < videoList.size(); x++) {
+            System.out.println("video " + (x + 1) + " mostrato per " + videoList.get(x).getdisplayed() + " secondi");
+        }
+    }
+}
